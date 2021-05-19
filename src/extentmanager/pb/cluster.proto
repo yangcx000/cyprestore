@@ -1,0 +1,140 @@
+/*
+ * Copyright 2020 JDD authors.
+ * @yangchunxin3
+ *
+ */
+
+syntax = "proto2";
+
+import "common/pb/types.proto";
+
+package cyprestore.extentmanager.pb;
+
+option cc_generic_services = true;
+
+message CreatePoolRequest {
+    required string name = 1;
+    required cyprestore.common.pb.PoolType type = 2;
+    required int32 replica_count = 3;
+    required int32 es_count = 4;
+    required cyprestore.common.pb.FailureDomain failure_domain = 5;
+}
+
+message CreatePoolResponse {
+    required cyprestore.common.pb.Status status = 1;
+    optional string pool_id = 2;
+}
+
+message UpdatePoolRequest {
+    required string pool_id = 1;
+    optional string name = 2;
+    optional cyprestore.common.pb.PoolType type = 3;
+    optional int32 replica_count = 4;
+    optional int32 es_count = 5;
+    optional cyprestore.common.pb.FailureDomain failure_domain = 6;
+}
+
+message UpdatePoolResponse {
+    required cyprestore.common.pb.Status status = 1;
+}
+
+message DeletePoolRequest {
+    required string pool_id = 1;
+}
+
+message DeletePoolResponse {
+    required cyprestore.common.pb.Status status = 1;
+}
+
+message InitPoolRequest {
+    required string pool_id = 1;
+}
+
+message InitPoolResponse {
+    required cyprestore.common.pb.Status status = 1;
+}
+
+message QueryPoolRequest {
+    required string pool_id = 1;
+}
+
+message QueryPoolResponse {
+    required cyprestore.common.pb.Status status = 1;
+    optional cyprestore.common.pb.Pool pool = 2;
+}
+
+message ListPoolsRequest {
+}
+
+message ListPoolsResponse {
+    required cyprestore.common.pb.Status status = 1;
+    repeated cyprestore.common.pb.Pool pools = 2;
+}
+
+// ExtentServer messages
+message QueryExtentServerRequest {
+    required int32 es_id = 1;
+    required string pool_id = 2;
+}
+
+message QueryExtentServerResponse {
+    required cyprestore.common.pb.Status status = 1;
+    optional cyprestore.common.pb.ExtentServer es = 2;
+}
+
+message ListExtentServersRequest {
+    required string pool_id = 1;
+}
+
+message ListExtentServersResponse {
+    required cyprestore.common.pb.Status status = 1;
+    repeated cyprestore.common.pb.ExtentServer ess = 2;
+}
+
+message DeleteExtentServerRequest {
+    required string pool_id = 1;
+    required int32 es_id = 2;
+}
+
+message DeleteExtentServerResponse {
+    required cyprestore.common.pb.Status status = 1;
+}
+
+// Replication Group messages
+message QueryReplicationGroupRequest {
+    required string rg_id = 1;
+    required string pool_id = 2;
+}
+
+message QueryReplicationGroupResponse {
+    required cyprestore.common.pb.Status status = 1;
+    optional cyprestore.common.pb.ReplicaGroup rg = 2;
+}
+
+message ListReplicationGroupsRequest {
+    required string pool_id = 1;
+}
+
+message ListReplicationGroupsResponse {
+    required cyprestore.common.pb.Status status = 1;
+    repeated cyprestore.common.pb.ReplicaGroup rgs = 2;
+}
+
+service ClusterService {
+  // pool apis
+  rpc CreatePool(CreatePoolRequest) returns (CreatePoolResponse);
+  rpc UpdatePool(UpdatePoolRequest) returns (UpdatePoolResponse);
+  rpc DeletePool(DeletePoolRequest) returns (DeletePoolResponse);
+  rpc InitPool(InitPoolRequest) returns (InitPoolResponse);
+  rpc QueryPool(QueryPoolRequest) returns (QueryPoolResponse);
+  rpc ListPools(ListPoolsRequest) returns (ListPoolsResponse);
+
+  // es apis
+  rpc QueryExtentServer(QueryExtentServerRequest) returns (QueryExtentServerResponse);
+  rpc ListExtentServers(ListExtentServersRequest) returns (ListExtentServersResponse);
+  rpc DeleteExtentServer(DeleteExtentServerRequest) returns (DeleteExtentServerResponse);
+
+  // rg apis
+  rpc QueryReplicationGroup(QueryReplicationGroupRequest) returns (QueryReplicationGroupResponse);
+  rpc ListReplicationGroups(ListReplicationGroupsRequest) returns (ListReplicationGroupsResponse);
+};

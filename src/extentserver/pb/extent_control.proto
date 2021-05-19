@@ -1,0 +1,26 @@
+/*
+ * Copyright 2020 JDD authors.
+ * @yangchunxin3
+ *
+ */
+
+syntax = "proto2";
+
+import "common/pb/types.proto";
+
+package cyprestore.extentserver.pb;
+
+option cc_generic_services = true;
+
+
+message ReclaimExtentRequest {
+    required string extent_id = 1;
+}
+
+message ReclaimExtentResponse {
+    required cyprestore.common.pb.Status status = 1;
+}
+
+service ExtentControlService {
+    rpc ReclaimExtent(ReclaimExtentRequest) returns (ReclaimExtentResponse);
+};

@@ -1,0 +1,28 @@
+/*
+ * Copyright 2020 JDD authors.
+ * @yangchunxin3
+ *
+ */
+
+syntax = "proto2";
+
+import "common/pb/types.proto";
+
+package cyprestore.extentmanager.pb;
+
+option cc_generic_services = true;
+
+message ReportHeartbeatRequest {
+    required cyprestore.common.pb.ExtentServer es = 1;
+}
+
+message ReportHeartbeatResponse {
+    required cyprestore.common.pb.Status status = 1;
+    optional uint64 extent_size = 2;
+    optional uint64 router_version = 3;
+}
+
+service HeartbeatService {
+  // heartbeat api
+  rpc ReportHeartbeat(ReportHeartbeatRequest) returns (ReportHeartbeatResponse);
+};

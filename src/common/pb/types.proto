@@ -1,0 +1,186 @@
+/*
+ * Copyright 2020 JDD authors.
+ * @yangchunxin3
+ *
+ */
+
+syntax = "proto2";
+
+package cyprestore.common.pb;
+
+enum UserStatus {
+    USER_STATUS_CREATED = 0;
+    USER_STATUS_DELETED = 1;
+    USER_STATUS_UNKNOWN = -1;
+};
+
+message User {
+    required string id = 1;
+    required string name = 2;
+    required string email = 3;
+    optional string comments = 4;
+    optional UserStatus status = 5;
+    optional string pool_id = 6;
+    optional int32 set_id = 7;
+    required string create_date = 8;
+    required string update_date = 9;
+};
+
+enum BlobType {
+    BLOB_TYPE_GENERAL = 0;
+    BLOB_TYPE_SUPERIOR = 1;
+    BLOB_TYPE_EXCELLENT = 2;
+    BLOB_TYPE_UNKNOWN = -1;
+}
+
+enum BlobStatus {
+    BLOB_STATUS_CREATED = 0;
+    BLOB_STATUS_DELETED = 1;
+    BLOB_STATUS_RESIZING = 2;
+    BLOB_STATUS_SNAPSHOTTING = 3;
+    BLOB_STATUS_CLONING = 4;
+    BLOB_STATUS_UNKNOWN = -1;
+}
+
+message Blob {
+    required string id = 1;
+    required string name = 2;
+    required uint64 size = 3;
+    required BlobType type = 4;
+    required string desc = 5;
+    required BlobStatus status = 6;
+    required string pool_id = 7;
+    required string user_id = 8;
+    required string instance_id = 9;
+    required string create_date = 10;
+    required string update_date = 11;
+}
+
+enum ESStatus {
+    ES_STATUS_OK = 0; 
+    ES_STATUS_FAILED = 1; 
+    ES_STATUS_RECOVERING = 2; 
+    ES_STATUS_REBALANCING = 3; 
+    ES_STATUS_UNKNOWN = -1; 
+}
+
+message ExtentServer {
+    required int32 id = 1;
+    required string name = 2;
+    required uint64 size = 3;
+    required uint64 capacity = 4;
+    required string pool_id = 5;
+    required string host = 6;
+    required string rack = 7;
+    optional ESStatus status = 8;
+    required Endpoint endpoint = 9;
+    optional string create_date = 10;
+    optional string update_date = 11;
+}
+
+enum RGStatus {
+    RG_STATUS_OK = 0;
+    RG_STATUS_DOWNGRADE = 1;
+    RG_STATUS_RECOVERING = 2;
+    RG_STATUS_REBALANCING = 3;
+    RG_STATUS_UNKNOWN = -1;
+}
+
+message ReplicaGroup {
+    required string id = 1;
+    required RGStatus status = 2;
+    required uint32 extent_size = 3;
+    required uint64 nr_extents = 4;
+    required string pool_id = 5;
+    required string create_date = 6;
+    required string update_date = 7;
+    repeated int32 extent_servers = 8;
+}
+
+message Endpoint {
+    required string public_ip = 1;
+    required int32 public_port = 2;
+    optional string private_ip = 3;
+    optional int32 private_port = 4;
+}
+
+message ExtentManager {
+    required int32 id = 1;
+    required string name = 2;
+    required Endpoint endpoint = 3;
+}
+
+enum PoolType {
+    POOL_TYPE_HDD = 0;
+    POOL_TYPE_SSD = 1;
+    POOL_TYPE_NVME_SSD = 2;
+    POOL_TYPE_SPECIAL = 3;
+    POOL_TYPE_UNKNOWN = -1;
+}
+
+enum PoolStatus {
+    POOL_STATUS_CREATED = 0;
+    POOL_STATUS_ENABLED = 1;
+    POOL_STATUS_DISABLED = 2;
+    POOL_STATUS_UNKNOWN = -1;
+}
+
+enum FailureDomain {
+    FAILURE_DOMAIN_RACK = 0;
+    FAILURE_DOMAIN_HOST = 1;
+    FAILURE_DOMAIN_NODE = 2;
+    FAILURE_DOMAIN_UNKNOWN = -1;
+}
+
+message Pool {
+    required string id = 1; 
+    required string name = 2;
+    required PoolType type = 3;
+    required PoolStatus status = 4;
+    required int32 replica_count = 5;
+    required int32 rg_count = 6;
+    required int32 es_count = 7;
+    required FailureDomain failure_domain = 8;
+    required string create_date = 9;
+    required string update_date = 10;
+    required uint64 capacity = 11;
+    required uint64 size = 12;
+    required uint32 extent_size = 13;
+    required uint64 num_extents = 14;
+    repeated ExtentServer ess = 15;
+    repeated ReplicaGroup rgs = 16;
+}
+
+message Set {
+    required int32 id = 1;
+    required string name = 2;
+    required ExtentManager em = 3;
+    repeated Pool pools = 4;
+}
+
+message SetRoute {
+    required int32 set_id = 1;
+    required string set_name = 2;
+    required string ip = 3;
+    required int32 port = 4;
+}
+
+message EsInstance {
+    required int32 es_id = 1;
+    required string public_ip = 2;
+    required int32 public_port = 3;
+    required string private_ip = 4;
+    required int32 private_port = 5;
+}
+
+message ExtentRouter {
+    required string extent_id = 1;
+    required string rg_id = 2;
+    required EsInstance primary = 3;
+    repeated EsInstance secondaries = 4;
+}
+
+message Status {
+    required int32 code = 1;
+    optional string message = 2;
+}

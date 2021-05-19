@@ -1,0 +1,24 @@
+alarmappname: Extentserver
+ 
+messagelevel: WARNING #EMERGENCY,紧急 > CRITICAL,关键 > WARNING,警告 > NOTIFICATION,通知 > DEBUGGING
+ 
+recipientway: MSG
+ 
+rulekey: LogError
+ 
+recipients:
+  DONGDONG:
+    - yangchunxin3
+    #- feifei5
+    #- chenjianfei18
+    #- ext.cunchu
+    #- gengjichao
+    #- zhangting362
+    #- yangbing29
+    #- fanwentao5
+
+#online
+uwc:
+    appid:    Cyprestore
+    secret:   c3e4f9a8dd7f4bdc97bdf746cde9a284
+    url:      http://uwc-server.jdpay.local/alarm/send

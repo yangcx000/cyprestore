@@ -1,0 +1,154 @@
+syntax = "proto2";
+
+import "common/pb/types.proto";
+
+package cyprestore.access.pb;
+
+option cc_generic_services = true;
+
+message CreateUserRequest {
+    required string user_name = 1;
+    optional string email = 2;
+    optional string comments = 3;
+    optional int32 set_id = 4;
+    optional string pool_id = 5;
+    optional cyprestore.common.pb.PoolType pool_type = 6;
+};
+
+message CreateUserResponse {
+    required cyprestore.common.pb.Status status = 1;
+    optional string user_id = 2;
+}
+
+message DeleteUserRequest {
+    required string user_id = 1;    
+};
+
+message DeleteUserResponse {
+    required cyprestore.common.pb.Status status = 1; 
+}
+
+message UpdateUserRequest {
+    required string user_id = 1;
+    optional string new_name = 2;
+    optional string new_email = 3;
+    optional string new_comments = 4;
+};
+
+message UpdateUserResponse {
+    required cyprestore.common.pb.Status status = 1; 
+}
+
+message QueryUserRequest {
+    required string user_id = 1;    
+};
+
+message QueryUserResponse {
+    required cyprestore.common.pb.Status status = 1; 
+    optional cyprestore.common.pb.User userinfo = 2;
+};
+ 
+message ListUsersRequest {
+    required int32 set_id=1;
+    optional int32 from = 2;    
+    optional int32 count = 3;    
+};
+
+message ListUsersResponse {
+    required cyprestore.common.pb.Status status = 1; 
+    repeated cyprestore.common.pb.User Users = 2;
+};
+
+message CreateBlobRequest { 
+    required string user_id = 1; 
+    required string blob_name = 2;
+    required uint64 blob_size = 3;
+    required cyprestore.common.pb.BlobType blob_type = 4;
+    required string instance_id = 5;
+    optional string blob_desc = 6;
+    optional string pool_id = 7;
+};
+
+message CreateBlobResponse {
+    required cyprestore.common.pb.Status status = 1; 
+    optional string blob_id = 2;
+}
+
+message DeleteBlobRequest {
+    required string user_id = 1;
+    required string blob_id = 2;  
+};
+
+message DeleteBlobResponse {
+    required cyprestore.common.pb.Status status = 1; 
+}
+
+message RenameBlobRequest {
+    required string user_id = 1;
+    required string blob_id = 2; 
+    optional string new_name = 3;  
+};
+
+message RenameBlobResponse {
+    required cyprestore.common.pb.Status status = 1; 
+}
+
+// Resize Blob
+message ResizeBlobRequest {
+    optional string user_id = 1;
+    required string blob_id = 2;
+    required uint64 new_size = 3;
+}
+
+message ResizeBlobResponse {
+    required cyprestore.common.pb.Status status = 1;
+}
+
+// QueryBlob
+message QueryBlobRequest {	 
+    required string user_id = 1;
+    required string blob_id = 2; 
+};
+ 
+message QueryBlobResponse {
+    required cyprestore.common.pb.Status status = 1;
+    optional cyprestore.common.pb.Blob blob_info = 2;
+}
+
+// List Blobs
+message ListBlobsRequest {
+    required string user_id = 1;
+    optional int32 from = 2;
+    optional int32 count = 3;
+}
+
+message ListBlobsResponse {
+    required cyprestore.common.pb.Status status = 1;
+    repeated cyprestore.common.pb.Blob blobs = 2;
+}
+
+message QuerySetRequest {
+    required string user_id = 1;
+}
+
+message QuerySetResponse {
+    required cyprestore.common.pb.Status status = 1;
+    optional cyprestore.common.pb.SetRoute setroute = 2;
+};
+
+service AccessService {
+	rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+	rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
+	rpc UpdateUser(UpdateUserRequest) returns(UpdateUserResponse);
+	rpc QueryUser(QueryUserRequest) returns(QueryUserResponse); 
+	rpc ListUsers(ListUsersRequest) returns(ListUsersResponse);      
+
+	rpc CreateBlob(CreateBlobRequest) returns (CreateBlobResponse);
+	rpc DeleteBlob(DeleteBlobRequest) returns (DeleteBlobResponse);
+	rpc RenameBlob(RenameBlobRequest) returns (RenameBlobResponse);
+	rpc ResizeBlob(ResizeBlobRequest) returns (ResizeBlobResponse);	
+	rpc QueryBlob(QueryBlobRequest) returns (QueryBlobResponse);
+	rpc ListBlobs(ListBlobsRequest) returns (ListBlobsResponse);	
+
+	rpc QuerySet(QuerySetRequest) returns (QuerySetResponse);
+};

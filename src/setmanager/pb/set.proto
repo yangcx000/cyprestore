@@ -1,0 +1,46 @@
+/*
+ * Copyright 2020 JDD authors.
+ * @yangchunxin3
+ *
+ */
+
+syntax = "proto2";
+
+import "common/pb/types.proto";
+
+package cyprestore.setmanager.pb;
+
+option cc_generic_services = true;
+
+message ListSetsRequest {
+}
+
+message ListSetsResponse {
+  required cyprestore.common.pb.Status status = 1;
+  repeated cyprestore.common.pb.SetRoute sets = 2;
+}
+
+message AllocateSetRequest {
+  required string user_name = 1;
+  optional cyprestore.common.pb.PoolType pool_type = 2;
+}
+
+message AllocateSetResponse {
+  required cyprestore.common.pb.Status status = 1;
+  optional cyprestore.common.pb.SetRoute set = 2;
+}
+
+message QuerySetRequest {
+  required string user_id = 1;
+}
+
+message QuerySetResponse {
+  required cyprestore.common.pb.Status status = 1;
+  optional cyprestore.common.pb.SetRoute set = 2;
+}
+
+service SetService {
+  rpc Allocate(AllocateSetRequest) returns (AllocateSetResponse);
+  rpc Query(QuerySetRequest) returns (QuerySetResponse);
+  rpc List(ListSetsRequest) returns (ListSetsResponse);
+};

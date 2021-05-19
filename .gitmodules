@@ -1,0 +1,12 @@
+[submodule "third-party/brpc"]
+	path = third-party/brpc
+	url = https://jcode.jdfmgt.com/git/jdt-brpc.git
+[submodule "third-party/spdk"]
+	path = third-party/spdk
+	url = https://github.com/spdk/spdk
+[submodule "third-party/braft"]
+	path = third-party/braft
+	url = https://github.com/baidu/braft
+[submodule "third-party/rocksdb"]
+	path = third-party/rocksdb
+	url = https://github.com/facebook/rocksdb

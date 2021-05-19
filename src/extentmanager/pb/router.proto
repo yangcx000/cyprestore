@@ -1,0 +1,28 @@
+/*
+ * Copyright 2020 JDD authors.
+ * @yangchunxin3
+ *
+ */
+
+syntax = "proto2";
+
+import "common/pb/types.proto";
+
+package cyprestore.extentmanager.pb;
+
+option cc_generic_services = true;
+
+message QueryRouterRequest {
+    required string extent_id = 1;
+}
+
+message QueryRouterResponse {
+    required cyprestore.common.pb.Status status = 1;
+    optional uint32 router_version = 2;
+    optional cyprestore.common.pb.ExtentRouter router = 3;
+}
+
+service RouterService {
+  // router apis
+  rpc QueryRouter(QueryRouterRequest) returns (QueryRouterResponse);
+};

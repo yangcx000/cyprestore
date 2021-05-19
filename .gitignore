@@ -1,0 +1,10 @@
+bin/*
+src/extentserver/extentserver
+lib/*
+*.o
+*.pb.cc
+*.pb.h
+*.gcda
+*.gcno
+clients/cyprebench/cyprebench
+tags

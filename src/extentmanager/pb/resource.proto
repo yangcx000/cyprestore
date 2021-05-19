@@ -1,0 +1,154 @@
+/*
+ * Copyright 2020 JDD authors.
+ * @yangchunxin3
+ *
+ */
+
+syntax = "proto2";
+
+import "common/pb/types.proto";
+
+package cyprestore.extentmanager.pb;
+
+option cc_generic_services = true;
+
+// Create User
+message CreateUserRequest {
+    required string user_name = 1;
+    required string email = 2;
+    optional string comments = 3;
+    optional string pool_id = 4;  // 指定创建到哪个pool
+}
+
+message CreateUserResponse {
+    required cyprestore.common.pb.Status status = 1;
+    optional string user_id = 2;
+}
+
+// Delete User
+message DeleteUserRequest {
+    required string user_id = 1;
+}
+
+message DeleteUserResponse {
+    required cyprestore.common.pb.Status status = 1;
+}
+
+// Update User
+message UpdateUserRequest {
+    required string user_id = 1;
+    optional string new_name = 2;
+    optional string new_email = 3;
+    optional string new_comments = 4;
+}
+
+message UpdateUserResponse {
+    required cyprestore.common.pb.Status status = 1;
+}
+
+// Query User
+message QueryUserRequest {
+    required string user_id = 1;
+}
+
+message QueryUserResponse {
+    required cyprestore.common.pb.Status status = 1;
+    optional cyprestore.common.pb.User user = 2;
+}
+
+// List Users
+message ListUsersRequest {
+}
+
+message ListUsersResponse {
+    required cyprestore.common.pb.Status status = 1;
+    repeated cyprestore.common.pb.User users = 2;
+}
+
+// Create Blob
+message CreateBlobRequest {
+    required string user_id = 1;
+    required string blob_name = 2;
+    required uint64 blob_size = 3;
+    required cyprestore.common.pb.BlobType blob_type = 4;
+    required string instance_id = 5;
+    optional string blob_desc = 6;
+    optional string pool_id = 7;
+}
+
+message CreateBlobResponse {
+    required cyprestore.common.pb.Status status = 1;
+    optional string pool_id = 2;
+    optional string blob_id = 3;
+}
+
+// Delete Blob
+message DeleteBlobRequest {
+    required string user_id = 1;
+    required string blob_id = 2;
+}
+
+message DeleteBlobResponse {
+    required cyprestore.common.pb.Status status = 1;
+}
+
+// Rename Blob
+message RenameBlobRequest {
+    required string user_id = 1;
+    required string blob_id = 2;
+    required string new_name = 3;
+}
+
+message RenameBlobResponse {
+    required cyprestore.common.pb.Status status = 1;
+}
+
+// Query Blob
+message QueryBlobRequest {
+    required string blob_id = 2;
+}
+
+message QueryBlobResponse {
+    required cyprestore.common.pb.Status status = 1;
+    optional cyprestore.common.pb.Blob blob = 2;
+    optional uint64 extent_size = 3;
+    optional uint32 max_block_size = 4;
+}
+
+// List Blobs
+message ListBlobsRequest {
+    required string user_id = 1;
+}
+
+message ListBlobsResponse {
+    required cyprestore.common.pb.Status status = 1;
+    repeated cyprestore.common.pb.Blob blobs = 2;
+}
+
+// Resize Blob
+message ResizeBlobRequest {
+    required string user_id = 1;
+    required string blob_id = 2;
+    required uint64 new_size = 3;
+}
+
+message ResizeBlobResponse {
+    required cyprestore.common.pb.Status status = 1;
+}
+
+service ResourceService {
+  // User Interface
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
+  rpc QueryUser(QueryUserRequest) returns (QueryUserResponse);
+  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
+
+  // Blob Interface
+  rpc CreateBlob(CreateBlobRequest) returns (CreateBlobResponse);
+  rpc DeleteBlob(DeleteBlobRequest) returns (DeleteBlobResponse);
+  rpc RenameBlob(RenameBlobRequest) returns (RenameBlobResponse);
+  rpc QueryBlob(QueryBlobRequest) returns (QueryBlobResponse);
+  rpc ListBlobs(ListBlobsRequest) returns (ListBlobsResponse);
+  rpc ResizeBlob(ResizeBlobRequest) returns (ResizeBlobResponse);
+};

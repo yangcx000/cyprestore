@@ -1,0 +1,84 @@
+/*
+ * Copyright 2020 JDD authors.
+ * @yangchunxin3
+ *
+ */
+
+syntax = "proto2";
+
+import "common/pb/types.proto";
+
+package cyprestore.extentserver.pb;
+
+option cc_generic_services = true;
+
+// Read
+message ReadRequest {
+    required string extent_id = 1;
+    required uint64 offset = 2;
+    required uint64 size = 3;
+    optional uint32 header_crc32 = 4;
+}
+
+message ReadResponse {
+    required cyprestore.common.pb.Status status = 1;
+    optional uint32 crc32 = 2;
+    optional uint32 router_version = 3;
+}
+
+// Write
+message WriteRequest {
+    required string extent_id = 1;
+    required uint64 offset = 2;
+    required uint64 size = 3;
+    optional uint32 crc32 = 4;
+    optional uint32 header_crc32 = 5;
+}
+
+message WriteResponse {
+    required cyprestore.common.pb.Status status = 1;
+    optional uint32 router_version = 3;
+}
+
+// Delete
+message DeleteRequest {
+    required string extent_id = 1;
+    required uint64 offset = 2;
+    required uint64 size = 3;
+}
+
+message DeleteResponse {
+    required cyprestore.common.pb.Status status = 1;
+}
+
+// replicate
+message ReplicateRequest {
+    required string extent_id = 1;
+    required uint64 offset = 2;
+    required uint64 size = 3;
+    optional uint32 crc32 = 4;
+}
+
+message ReplicateResponse {
+    required cyprestore.common.pb.Status status = 1;
+}
+
+// scrub
+message ScrubRequest {
+    required string extent_id = 1;
+    required uint64 offset = 2;
+    required uint64 size = 3;
+}
+
+message ScrubResponse {
+    required cyprestore.common.pb.Status status = 1;
+    optional uint32 crc32 = 2;
+}
+
+service ExtentIOService {
+    rpc Read(ReadRequest) returns (ReadResponse);
+    rpc Write(WriteRequest) returns (WriteResponse);
+    rpc Delete(DeleteRequest) returns (DeleteResponse);
+    rpc Replicate(ReplicateRequest) returns (ReplicateResponse);
+    rpc Scrub(ScrubRequest) returns (ScrubResponse);
+};

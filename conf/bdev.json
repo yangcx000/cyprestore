@@ -1,0 +1,41 @@
+{
+  "subsystems": [
+    {
+      "subsystem": "bdev",
+      "config": [
+        {
+          "params": {
+            "bdev_io_pool_size": 65536,
+            "bdev_io_cache_size": 256
+          },
+          "method": "bdev_set_options"
+        },
+        {
+          "params": {
+            "timeout_us": 0,
+            "action_on_timeout": "none",
+            "retry_count": 4,
+            "nvme_ioq_poll_period_us": 0,
+            "nvme_adminq_poll_period_us": 100000
+          },
+          "method": "bdev_nvme_set_options"
+        },
+        {
+          "params": {
+            "traddr": "0000:85:00.0",
+            "trtype": "PCIe",
+            "name": "Nvme0"
+          },
+          "method": "bdev_nvme_attach_controller"
+        },
+        {
+          "params": {
+            "period_us": 10000000,
+            "enable": false
+          },
+          "method": "bdev_nvme_set_hotplug"
+        }
+      ]
+    }
+  ]
+}

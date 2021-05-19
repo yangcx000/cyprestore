@@ -1,0 +1,25 @@
+/*
+ * Copyright 2020 JDD authors.
+ * @yangchunxin3
+ *
+ */
+
+syntax = "proto2";
+
+package cyprestore.setmanager.pb;
+
+import "common/pb/types.proto";
+
+option cc_generic_services = true;
+
+message HeartbeatRequest {
+  required cyprestore.common.pb.Set set = 1;
+}
+
+message HeartbeatResponse {
+ 	required cyprestore.common.pb.Status status = 1;
+}
+
+service HeartbeatService {
+ 	rpc ReportHeartbeat(HeartbeatRequest) returns (HeartbeatResponse);
+};
