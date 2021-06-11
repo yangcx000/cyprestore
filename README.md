@@ -2,6 +2,7 @@
 自研高性能分布式存储引擎Cypress Store.
 
 ![Cyprestore单数据中心集群架构图](docs/Architecture.png)
+*Cyprestore单数据中心集群架构图*
 
 # 开发环境搭建
 ## 1 项目源码
@@ -65,7 +66,7 @@ make static_lib -j8
 make shared_lib -j8
 ```
 
-** 注意：用于生产环境，不要直接使用make或者make all编译成性能较差的debug模式。**
+*注意：用于生产环境，不要直接使用make或者make all编译成性能较差的debug模式。*
 
 ### 4.3 spdk
 ```sh
