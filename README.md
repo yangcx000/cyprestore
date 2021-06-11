@@ -8,12 +8,16 @@
 TBD
 ### Todo list
 - 日志和索引系统(副本一致性协议)
-避免使用Raft复制协议。
-[参考Windows Azure Storage: A Highly Available Cloud Storage Service with Strong Consistency](https://azure.microsoft.com/en-us/blog/sosp-paper-windows-azure-storage-a-highly-available-cloud-storage-service-with-strong-consistency/)
+
+> 避免使用Raft复制协议。
+> 
+> [参考Windows Azure Storage: A Highly Available Cloud Storage Service with Strong Consistency](https://azure.microsoft.com/en-us/blog/sosp-paper-windows-azure-storage-a-highly-available-cloud-storage-service-with-strong-consistency/)
 
 - 集群和存储节点故障恢复
 - 数据流和控制流分离(性能加速)
+
 数据流走spdk nvmf框架，使用RDMA RoCE网络加速, 控制流继续使用brpc框架。
+- 磁盘空间精简配置
 - 存储节点元数据直接写裸设备，替换Rocksdb
 
 ## 开发环境搭建
