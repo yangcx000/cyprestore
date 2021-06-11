@@ -8,7 +8,9 @@
 TBD
 ### Todo list
 - 日志和索引系统(副本一致性协议)
+
 避免使用Raft复制协议。
+
 [参考Windows Azure Storage: A Highly Available Cloud Storage Service with Strong Consistency](https://azure.microsoft.com/en-us/blog/sosp-paper-windows-azure-storage-a-highly-available-cloud-storage-service-with-strong-consistency/)
 
 - 集群和存储节点故障恢复
