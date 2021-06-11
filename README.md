@@ -1,9 +1,7 @@
 # cyprestore
-====
 自研高性能分布式存储引擎Cypress Store.
 
 # 开发环境搭建
-====
 ## 克隆源码
 ```sh
 mkdir workspace && cd workspace  
@@ -14,9 +12,9 @@ cd cyprestore && git submodule update --init --recursive
 ## 第三方依赖 
 | 第三方依赖 | repo地址 | 版本 |
 | ------ | ------ | ------ |
-| brpc | [https://github.com/apache/incubator-brpc.git][PlDb] | tags/0.9.7 |
-| rocksdb | [https://github.com/facebook/rocksdb.git][PlGh] | tags/v6.13.3 |
-| spdk | [https://github.com/spdk/spdk.git][PlGd] | tags/v20.04.1 |
+| brpc | [https://github.com/apache/incubator-brpc.git] | tags/0.9.7 |
+| rocksdb | [https://github.com/facebook/rocksdb.git] | tags/v6.13.3 |
+| spdk | [https://github.com/spdk/spdk.git] | tags/v20.04.1 |
 
 ## 编译器版本
 为了使用C++11，GCC-C++版本至少4.8+。
