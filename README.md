@@ -1,6 +1,8 @@
 # cyprestore
 自研高性能分布式存储引擎Cypress Store.
 
+![avatar](docs/Architecture.png)
+
 # 开发环境搭建
 ## 1 项目源码
 ### 1.1 克隆源码
