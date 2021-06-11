@@ -17,12 +17,12 @@ cd cyprestore && git submodule update --init --recursive
 ## 1.2 第三方依赖 
 | 第三方依赖 | repo地址 | 版本 |
 | ------ | ------ | ------ |
-| brpc | [https://github.com/apache/incubator-brpc.git] | tags/0.9.7 |
-| rocksdb | [https://github.com/facebook/rocksdb.git] | tags/v6.13.3 |
-| spdk | [https://github.com/spdk/spdk.git] | tags/v20.04.1 |
+| brpc | https://github.com/apache/incubator-brpc.git | tags/0.9.7 |
+| rocksdb | https://github.com/facebook/rocksdb.git | tags/v6.13.3 |
+| spdk | https://github.com/spdk/spdk.git | tags/v20.04.1 |
 
 ## 2 编译器版本
-为了使用C++11，GCC-C++版本至少4.8+。
+**为了使用C++11，GCC-C++版本至少4.8+。**
 
 ## 3 安装依赖库
 ### 3.1 brpc依赖库
