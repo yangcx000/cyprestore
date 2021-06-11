@@ -13,7 +13,8 @@ git clone https://github.com/yangcx000/cyprestore.git
 cd cyprestore && git submodule update --init --recursive  
 ```
 
-- 第三方依赖   
+- 第三方依赖
+
 | 第三方依赖 | repo地址 | 版本 |
 | ------ | ------ | ------ |
 | brpc | https://github.com/apache/incubator-brpc.git | tags/0.9.7 |
