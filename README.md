@@ -3,7 +3,6 @@
 ## 架构简介
 
 ![Cyprestore单数据中心集群架构图](docs/Architecture.png)
-<center>Cyprestore单数据中心集群架构图</center>
 
 # 开发环境搭建
 ## 1 项目源码
