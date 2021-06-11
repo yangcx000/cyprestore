@@ -1,7 +1,7 @@
 # cyprestore
 自研高性能分布式存储引擎Cypress Store.
 
-![avatar](docs/Architecture.png)
+![Cyprestore单数据中心集群架构图](docs/Architecture.png)
 
 # 开发环境搭建
 ## 1 项目源码
