@@ -1,7 +1,7 @@
 /*
- * Copyright 2020 JDD authors.
- * @yangchunxin3
- *
+ * Copyright (c) 2020 The Cyprestore Authors. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file. See the AUTHORS file for names of contributors.
  */
 
 #include "kvstore/rocks_store.h"
@@ -16,7 +16,7 @@ RocksStore::RocksStore(const RocksOption &rocks_option) {
 }
 
 void RocksStore::InitRocksOptions() {
-    // XXX: add other itmes
+    // TODO(yangchunxin): add other itmes
     options_.create_if_missing = true;
     options_.IncreaseParallelism(compact_threads_);
     options_.OptimizeLevelStyleCompaction();
